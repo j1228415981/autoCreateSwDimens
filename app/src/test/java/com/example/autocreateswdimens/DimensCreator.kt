@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.autocreateswdimens
 
 import DimenValues
 import java.io.ByteArrayInputStream

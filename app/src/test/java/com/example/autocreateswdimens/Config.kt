@@ -1,11 +1,11 @@
-package com.example.myapplication
+package com.example.autocreateswdimens
 
 /**
  * Created by adaJQD on 2017/1/12.
  */
 object Config {
     //需要适配的设备宽度，单位：dp
-    val supportDevices = intArrayOf(300, 320, 340, 360, 370, 400, 420, 450, 480, 520, 600, 620, 800)
+    val supportDevices = intArrayOf(300, 340, 360, 370, 400, 420, 450, 480, 520, 600, 620, 800)
 
     //已知文件对应屏幕宽度，单位：dp
     const val DEFAULT_DIMEN_WIDTH = 320
