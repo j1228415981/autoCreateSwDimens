@@ -3,6 +3,7 @@
 <dimen name="dp_m_46">-57.50dp</dimen>
 <dimen name="dp0">0.00dp</dimen>
 <dimen name="dp0.5">0.62dp</dimen>
+<dimen name="dp0.75">0.94dp</dimen>
 <dimen name="dp1">1.25dp</dimen>
 <dimen name="dp2">2.50dp</dimen>
 <dimen name="dp2.5">3.12dp</dimen>
