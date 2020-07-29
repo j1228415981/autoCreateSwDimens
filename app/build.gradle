@@ -23,6 +23,10 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility versions.java_version
+        targetCompatibility versions.java_version
+    }
 }
 
 dependencies {

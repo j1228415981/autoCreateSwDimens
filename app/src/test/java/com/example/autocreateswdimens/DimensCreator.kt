@@ -17,36 +17,47 @@ class DimensCreator(
 ) {
     private val xmlHeader = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resources>"
     private val xmlFooter = "</resources>"
-    private val DIRTEMPLATE = "values-sw%sdp" //values-sw375dp
+    private val SMALL_WIDTH_DIR = "values-sw%sdp" //values-sw375dp
+    private val WIDTH_DIR = "values-w%sdp"
     private val dimenTemplate = "<dimen name=\"%s\">%sdp</dimen>"
     private val dimenTemplateSp = "<dimen name=\"%s\">%ssp</dimen>"
 
-    fun createAll() {
+    fun createSmallWidth() {
         val len = Config.supportDevices.size
         for (i in 0 until len) {
             val strings = DIRPath.split("values").toTypedArray()
-            val dir =
+            var scale = Config.supportDevices[i] * 1.0f / defaultDimenWidth
+            createSingleFile(
                 strings[0] + File.separator + String.format(
-                    DIRTEMPLATE,
+                    SMALL_WIDTH_DIR,
                     "" + Config.supportDevices[i]
-                )
-            val dirFile = File(dir)
-            if (dirFile.exists()) {
-                dirFile.delete()
-            }
-            dirFile.mkdirs()
-            val file =
-                File(dirFile.path + File.separator + "dimens.xml")
-            //            float scale = (float) i / Config.defaultValue;
-            println(i)
-            //            float scale = Config.supportScale[i];
-//            createSingleFile(file, scale);
-            createSingleFile(file, Config.supportDevices[i], defaultDimenWidth)
+                ), scale
+            )
         }
     }
 
-    private fun createSingleFile(file: File, supportDevices: Int, sw: Int) {
-        createSingleFile(file, supportDevices * 1.0f / sw)
+    fun createWidth() {
+        val len = Config.supportDevices.size
+        for (i in 0 until len) {
+            val strings = DIRPath.split("values").toTypedArray()
+            var scale = Config.supportDevices[i] * 1.0f / defaultDimenWidth
+            createSingleFile(
+                strings[0] + File.separator + String.format(
+                    WIDTH_DIR,
+                    "" + Config.supportDevices[i]
+                ), scale
+            )
+        }
+    }
+
+    private fun createSingleFile(file: String, scale: Float) {
+        val dirFile = File(file)
+        if (dirFile.exists()) {
+            dirFile.delete()
+        }
+        dirFile.mkdirs()
+        val file = File(dirFile.path + File.separator + "dimens.xml")
+        createSingleFile(file, scale)
     }
 
     private fun createSingleFile(file: File, scale: Float) {
@@ -57,12 +68,14 @@ class DimensCreator(
                 if (contains("dp")) {
                     val v: Float = replace("dp", "").trim().toFloat()
                     itemValue = formatDimen(v * scale)
-                    allData.append(String.format(dimenTemplate, values.name, itemValue)).append("\n")
+                    allData.append(String.format(dimenTemplate, values.name, itemValue))
+                        .append("\n")
                 } else if (contains("sp")) {
                     val v: Float = replace("sp", "").trim().toFloat()
                     itemValue = formatDimen(v * scale)
-                    allData.append(String.format(dimenTemplateSp, values.name, itemValue)).append("\n")
-                } else{
+                    allData.append(String.format(dimenTemplateSp, values.name, itemValue))
+                        .append("\n")
+                } else {
 
                 }
             }

@@ -15,7 +15,10 @@ class ExampleUnitTest {
         try {
             val defaultDimenValues = parser.parse(FileInputStream(Config.DEFAULT_DIMEN_FILE_PATH))
             val creator = DimensCreator(Config.GENERATE_DIMEN_FILE_DIR, defaultDimenValues, Config.DEFAULT_DIMEN_WIDTH)
-            creator.createAll()
+            //最小宽度
+//            creator.createSmallWidth()
+            //宽度
+            creator.createWidth()
         } catch (e: Exception) {
             e.printStackTrace()
         }
